@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_30_082752) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_30_093316) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,21 +27,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_30_082752) do
   end
 
   create_table "recipe_ingredients", force: :cascade do |t|
-    t.bigint "recipes_id", null: false
-    t.bigint "ingredients_id", null: false
+    t.bigint "recipe_id", null: false
+    t.bigint "ingredient_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["ingredients_id"], name: "index_recipe_ingredients_on_ingredients_id"
-    t.index ["recipes_id"], name: "index_recipe_ingredients_on_recipes_id"
+    t.index ["ingredient_id"], name: "index_recipe_ingredients_on_ingredient_id"
+    t.index ["recipe_id"], name: "index_recipe_ingredients_on_recipe_id"
   end
 
   create_table "recipe_tags", force: :cascade do |t|
-    t.bigint "recipes_id", null: false
-    t.bigint "tags_id", null: false
+    t.bigint "recipe_id", null: false
+    t.bigint "tag_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["recipes_id"], name: "index_recipe_tags_on_recipes_id"
-    t.index ["tags_id"], name: "index_recipe_tags_on_tags_id"
+    t.index ["recipe_id"], name: "index_recipe_tags_on_recipe_id"
+    t.index ["tag_id"], name: "index_recipe_tags_on_tag_id"
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -49,6 +49,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_30_082752) do
     t.string "main_ingredient"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "category"
+    t.bigint "category_id", null: false
+    t.index ["category_id"], name: "index_recipes_on_category_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -57,8 +60,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_30_082752) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "recipe_ingredients", "ingredients", column: "ingredients_id"
-  add_foreign_key "recipe_ingredients", "recipes", column: "recipes_id"
-  add_foreign_key "recipe_tags", "recipes", column: "recipes_id"
-  add_foreign_key "recipe_tags", "tags", column: "tags_id"
+  add_foreign_key "recipe_ingredients", "ingredients"
+  add_foreign_key "recipe_ingredients", "recipes"
+  add_foreign_key "recipe_tags", "recipes"
+  add_foreign_key "recipe_tags", "tags"
+  add_foreign_key "recipes", "categories"
 end

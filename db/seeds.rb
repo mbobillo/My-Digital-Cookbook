@@ -7,3 +7,172 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+RecipeTag.destroy_all
+RecipeIngredient.destroy_all
+Tag.destroy_all
+Ingredient.destroy_all
+Recipe.destroy_all
+Category.destroy_all
+
+recipes = Recipe.create([
+  { title: "Sauce Ranch",
+    category_id: 2,
+    main_ingredient: "Mayonnaise",
+  },
+  { title: "Salade César",
+    category_id: 1,
+    main_ingredient: "Laitue",},
+
+  { title: "Poulet au curry",
+    category_id: 1,
+    main_ingredient: "Poulet",},
+
+    { title: "Julienne de crudités",
+      category_id: 0,
+      main_ingredient: "Carotte",},
+
+    { title: "Nems",
+      category_id: 0,
+      main_ingredient: "Feuille de riz",},
+
+    { title: "Sauce Cacouhète",
+      category_id: 2,
+      main_ingredient: "Beurre de cacahouète",},
+
+    { title: "Muffin au chocolat",
+      category_id: 3,
+      main_ingredient: "Chocolat",},
+
+    { title: "Tarte aux fraises",
+      category_id: 3,
+      main_ingredient: "Fraise",},
+
+])
+
+Category.create([
+  { name: "Entrée" },
+  { name: "Plat" },
+  { name: "Sauce" },
+  { name: "Dessert" },
+])
+
+ingredients = Ingredient.create([
+  { name: "Mayonnaise" },
+  { name: "Laitue" },
+  { name: "Poulet" },
+  { name: "Carotte" },
+  { name: "Feuille de riz" },
+  { name: "Piment" },
+  { name: "Chocolat" },
+  { name: "Fraise" },
+  { name: "Huile d'olive" },
+  { name: "Parmesan" },
+  { name: "Ail" },
+  { name: "Crouton" },
+  { name: "Anchois" },
+  { name: "Vinaigre de cidre" },
+  { name: "Gimgembre" },
+  { name: "Farine" },
+  { name: "Beurre" },
+  { name: "Sucre" },
+  { name: "Oeuf" },
+  { name: "Sauce de soja" },
+  { name: "Oignon" },
+  { name: "Navet" },
+  { name: "Poivron" },
+  { name: "Tabasco" },
+  { name: "Vinaigre de riz" },
+  { name: "Beurre de cacahouète" },
+])
+
+tags = Tag.create([
+  { name: "Rapide" },
+  { name: "Simple" },
+  { name: "Gastro" },
+  { name: "Adaptable" },
+  { name: "Végé" },
+  { name: "Protéine" },
+  { name: "Eté" },
+  { name: "Hiver" },
+  { name: "Kids" },
+  { name: "Solo" },
+  { name: "Familial" },
+  { name: "Cuisson plaques" },
+  { name: "Cuisson four" },
+  { name: "Sans cuisson" },
+  { name: "A essayer" },
+  { name: "Validé" },
+  { name: "A anticiper" },
+])
+
+recipe_ingredients = RecipeIngredient.create([
+  { recipe_id: recipes[0].id, ingredient_id: ingredients[5].id },
+  { recipe_id: recipes[0].id, ingredient_id: ingredients[8].id },
+  { recipe_id: recipes[0].id, ingredient_id: ingredients[10].id },
+  { recipe_id: recipes[1].id, ingredient_id: ingredients[2].id },
+  { recipe_id: recipes[1].id, ingredient_id: ingredients[10].id },
+  { recipe_id: recipes[1].id, ingredient_id: ingredients[9].id },
+  { recipe_id: recipes[1].id, ingredient_id: ingredients[11].id },
+  { recipe_id: recipes[1].id, ingredient_id: ingredients[12].id },
+  { recipe_id: recipes[2].id, ingredient_id: ingredients[3].id },
+  { recipe_id: recipes[2].id, ingredient_id: ingredients[21].id },
+  { recipe_id: recipes[2].id, ingredient_id: ingredients[22].id },
+  { recipe_id: recipes[2].id, ingredient_id: ingredients[20].id },
+  { recipe_id: recipes[3].id, ingredient_id: ingredients[8].id },
+  { recipe_id: recipes[3].id, ingredient_id: ingredients[10].id },
+  { recipe_id: recipes[3].id, ingredient_id: ingredients[20].id },
+  { recipe_id: recipes[4].id, ingredient_id: ingredients[1].id },
+  { recipe_id: recipes[4].id, ingredient_id: ingredients[2].id },
+  { recipe_id: recipes[4].id, ingredient_id: ingredients[3].id },
+  { recipe_id: recipes[5].id, ingredient_id: ingredients[8].id },
+  { recipe_id: recipes[5].id, ingredient_id: ingredients[10].id },
+  { recipe_id: recipes[5].id, ingredient_id: ingredients[13].id },
+  { recipe_id: recipes[5].id, ingredient_id: ingredients[14].id },
+  { recipe_id: recipes[5].id, ingredient_id: ingredients[19].id },
+  { recipe_id: recipes[6].id, ingredient_id: ingredients[15].id },
+  { recipe_id: recipes[6].id, ingredient_id: ingredients[16].id },
+  { recipe_id: recipes[6].id, ingredient_id: ingredients[17].id },
+  { recipe_id: recipes[6].id, ingredient_id: ingredients[18].id },
+  { recipe_id: recipes[7].id, ingredient_id: ingredients[15].id },
+  { recipe_id: recipes[7].id, ingredient_id: ingredients[16].id },
+  { recipe_id: recipes[7].id, ingredient_id: ingredients[17].id },
+  { recipe_id: recipes[7].id, ingredient_id: ingredients[18].id },
+])
+
+recipe_tags = RecipeTag.create([
+  {recipe_id: recipes[0].id, tag_id: tags[0].id },
+  {recipe_id: recipes[0].id, tag_id: tags[13].id },
+  {recipe_id: recipes[0].id, tag_id: tags[15].id },
+  {recipe_id: recipes[1].id, tag_id: tags[1].id },
+  {recipe_id: recipes[1].id, tag_id: tags[3].id },
+  {recipe_id: recipes[1].id, tag_id: tags[5].id },
+  {recipe_id: recipes[1].id, tag_id: tags[13].id },
+  {recipe_id: recipes[2].id, tag_id: tags[7].id },
+  {recipe_id: recipes[2].id, tag_id: tags[5].id },
+  {recipe_id: recipes[2].id, tag_id: tags[8].id },
+  {recipe_id: recipes[3].id, tag_id: tags[1].id },
+  {recipe_id: recipes[3].id, tag_id: tags[4].id },
+  {recipe_id: recipes[3].id, tag_id: tags[6].id },
+  {recipe_id: recipes[3].id, tag_id: tags[9].id },
+  {recipe_id: recipes[3].id, tag_id: tags[2].id },
+  {recipe_id: recipes[3].id, tag_id: tags[3].id },
+  {recipe_id: recipes[3].id, tag_id: tags[8].id },
+  {recipe_id: recipes[3].id, tag_id: tags[14].id },
+  {recipe_id: recipes[3].id, tag_id: tags[13].id },
+  {recipe_id: recipes[4].id, tag_id: tags[3].id },
+  {recipe_id: recipes[4].id, tag_id: tags[8].id },
+  {recipe_id: recipes[4].id, tag_id: tags[12].id },
+  {recipe_id: recipes[4].id, tag_id: tags[13].id },
+  {recipe_id: recipes[5].id, tag_id: tags[2].id },
+  {recipe_id: recipes[5].id, tag_id: tags[8].id },
+  {recipe_id: recipes[5].id, tag_id: tags[12].id },
+  {recipe_id: recipes[5].id, tag_id: tags[6].id },
+  {recipe_id: recipes[5].id, tag_id: tags[8].id },
+  {recipe_id: recipes[6].id, tag_id: tags[2].id },
+  {recipe_id: recipes[6].id, tag_id: tags[6].id },
+  {recipe_id: recipes[6].id, tag_id: tags[12].id },
+  {recipe_id: recipes[6].id, tag_id: tags[16].id },
+  {recipe_id: recipes[6].id, tag_id: tags[7].id },
+  {recipe_id: recipes[7].id, tag_id: tags[12].id },
+  {recipe_id: recipes[7].id, tag_id: tags[3].id },
+])
