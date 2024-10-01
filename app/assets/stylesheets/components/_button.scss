@@ -1,0 +1,27 @@
+.button-primary {
+  padding: 12px 24px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid $dark-green;
+  gap: 8px;
+  background-color: $dark-green;
+  color: white;
+  transition: background-color 0.3s ease;
+  align-items: center;
+  font-weight: 500;
+}
+
+.button-small {
+  padding: 8px 18px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid $dark-green;
+  gap: 8px;
+  background-color: $dark-green;
+  color: white;
+  transition: background-color 0.3s ease;
+  align-items: center;
+  font-weight: 500;
+}
