@@ -1,27 +1,55 @@
-.tag-selected {
-  padding: 8px 18px;
-  border-radius: 20px;
+.tag-wrapper {
+  width: 100%;
+  max-width: 100%;
   display: flex;
-  flex-direction: row;
-  border: 1px solid $green;
-  gap: 8px;
-  background-color: $green;
-  color: $black;
-  transition: background-color 0.3s ease;
-  align-items: center;
-  font-weight: 400;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  box-sizing: border-box;
+  padding: 1rem;
+  margin: 0 auto;
 }
 
-.tag-primary {
-  padding: 8px 18px;
-  border-radius: 20px;
+.tag-item{
+  margin: 4px;
+  border-radius: 16px;
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.tag-label{
+  padding: 8px 18px;
+  border-radius: 16px;
   border: 1px solid $light-green;
-  gap: 8px;
   background-color: $light-green;
   color: $black;
   transition: background-color 0.3s ease;
-  align-items: center;
-  font-weight: 400;
+}
+
+.tag-checkbox {
+  display: none;
+}
+
+
+.tag-checkbox:checked + .tag-label {
+  border: 1px solid $green;
+  background-color: $green;
+}
+
+.padding-left-custom {
+  padding-left: 1.2rem;
+}
+
+@media (max-height: 860px) {
+  .tag-label {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+  .padding-left-custom {
+    padding-left: 0.75rem;
+  }
 }

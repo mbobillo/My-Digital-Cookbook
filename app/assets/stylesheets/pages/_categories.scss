@@ -1,6 +1,9 @@
 .row-wrapper {
+  width: 100%;
+  max-width: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  padding: 0 15px;
+  box-sizing: border-box;
 }
-
