@@ -7,6 +7,17 @@ class RecipesController < ApplicationController
 
   def index
     @recipes = Recipe.all
+    if params[:category].present?
+      @recipes = @recipes.where(category_id: params[:category])
+    end
+
+    if params[:main_ingredient].present?
+      @recipes = @recipes.where("main_ingredient ILIKE ?", "%#{params[:main_ingredient]}%")
+    end
+
+    if params[:tags].present?
+      @recipes = @recipes.joins(:tags).where(tags: { id: params[:tags] })
+    end
   end
 
   def show

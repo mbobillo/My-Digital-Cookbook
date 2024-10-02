@@ -2,54 +2,69 @@
   <div class="container-custom">
     <h1 class="text-center">My Digital Coobook</h1>
     <hr class="thick-line">
-    <div class="row-wrapper">
-      <div class="row">
-        <div class="col-6 col-lg-3 g-2">
-          <a href="/categories/0">
-            <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://media.istockphoto.com/id/1127070863/fr/photo/v%C3%A9g%C3%A9tarien-nems-vietnamiens-avec-carotte-concombre-sauce-%C3%A9pic%C3%A9e-nouilles-de-riz-et-de-choux.webp?a=1&b=1&s=612x612&w=0&k=20&c=IGPMUnAORlA4CosgTTUPi_vq5aiFyW-mEPR1lGQnJSc=)">
+    <%= form_with url: recipes_path, method: :get, local: true do %>
+      <div class="row-wrapper">
+        <div class="row">
+          <div class="col-6 col-lg-3 g-2">
+            <div class="card-category category-selectable" data-category="0" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://media.istockphoto.com/id/1127070863/fr/photo/v%C3%A9g%C3%A9tarien-nems-vietnamiens-avec-carotte-concombre-sauce-%C3%A9pic%C3%A9e-nouilles-de-riz-et-de-choux.webp?a=1&b=1&s=612x612&w=0&k=20&c=IGPMUnAORlA4CosgTTUPi_vq5aiFyW-mEPR1lGQnJSc=)">
               <h2 class="text-size-regular color-white">Entrées</h2>
             </div>
-          </a>
-        </div>
-        <div class="col-6 col-lg-3 g-2">
-          <a href="/categories/1">
-            <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://media.istockphoto.com/id/488960908/fr/photo/de-p%C3%A2tes-maison.webp?a=1&b=1&s=612x612&w=0&k=20&c=t0rzgpw_8cFKmWRhroenw9B0S897AQdfNrUHhV2ijzA=)">
+          </div>
+          <div class="col-6 col-lg-3 g-2">
+            <div class="card-category category-selectable" data-category="1" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://media.istockphoto.com/id/488960908/fr/photo/de-p%C3%A2tes-maison.webp?a=1&b=1&s=612x612&w=0&k=20&c=t0rzgpw_8cFKmWRhroenw9B0S897AQdfNrUHhV2ijzA=)">
               <h2 class="text-size-regular color-white">Plats</h2>
             </div>
-          </a>
-        </div>
-        <div class="col-6 col-lg-3 g-2">
-          <a href="/categories/2">
-            <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://images.unsplash.com/photo-1499126167718-c87f5c1387e8?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHNhdWNlJTIwdmVyc2VyfGVufDB8fDB8fHww)">
+          </div>
+          <div class="col-6 col-lg-3 g-2">
+            <div class="card-category category-selectable" data-category="2" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://images.unsplash.com/photo-1499126167718-c87f5c1387e8?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHNhdWNlJTIwdmVyc2VyfGVufDB8fDB8fHww)">
               <h2 class="text-size-regular color-white">Sauces</h2>
             </div>
-          </a>
-        </div>
-        <div class="col-6 col-lg-3 g-2">
-          <a href="/categories/3">
-            <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://media.istockphoto.com/id/1223139298/fr/photo/photographie-%C3%A0-angle-%C3%A9lev%C3%A9-dune-tarte-aux-fruits-en-treillis.webp?a=1&b=1&s=612x612&w=0&k=20&c=KHUwqNguKplwaf8cUWLOulB6uHlApfAlJDz8x_oeiNg=)">
+          </div>
+          <div class="col-6 col-lg-3 g-2">
+            <div class="card-category category-selectable" data-category="3" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://media.istockphoto.com/id/1223139298/fr/photo/photographie-%C3%A0-angle-%C3%A9lev%C3%A9-dune-tarte-aux-fruits-en-treillis.webp?a=1&b=1&s=612x612&w=0&k=20&c=KHUwqNguKplwaf8cUWLOulB6uHlApfAlJDz8x_oeiNg=)">
               <h2 class="text-size-regular color-white">Desserts</h2>
             </div>
-          </a>
+          </div>
+        </div>
+        <%= hidden_field_tag :category, params[:category], id: 'selected_category' %>
+      </div>
+      <div class="d-flex flex-column justify-content-start">
+        <div class="input-wrapper">
+          <div class="d-flex justify-content-center align-items-center me-2"><h3 class="form-label text-size-regular">Ingrédient clé : </h3></div>
+          <label for="main_ingredient" class="d-none">Ingredient clé</label>
+          <%= text_field_tag :main_ingredient, params[:main_ingredient], placeholder: "Carotte", class: "input-field text-size-small input-uppercase" %>
+        </div>
+        <div class="text-start padding-left-custom">
+          <h3 class="form-label text-size-regular text-start">Tags (cliquez pour sélectionner) : </h3>
+        </div>
+        <div class="tag-wrapper">
+          <% Tag.all.each do |tag| %>
+            <div class="tag-item">
+              <%= check_box_tag "tags[]", tag.id, params[:tags]&.include?(tag.id.to_s), id: "tag_#{tag.id}", class: "tag-checkbox" %>
+              <%= label_tag "tag_#{tag.id}", tag.name, class: "tag-label" %>
+            </div>
+            <% end %>
         </div>
       </div>
-    </div>
-    <div class="d-flew flex-column justify-content-start">
-      <div class="input-wrapper">
-        <div class="d-flex justify-content-center align-items-center me-2"><h3 class="form-label text-size-regular">Ingrédient clé : </h3></div>
-        <label for="main_ingredient" class="d-none">Ingredient clé</label>
-        <%= text_field_tag :main_ingredient, params[:main_ingredient], placeholder: "Carotte", class: "input-field text-size-small input-uppercase" %>
+      <div class="d-flex justify-content-center mt-2">
+        <%= submit_tag "CHERCHER", class: "button-main" %>
       </div>
-      <div class="text-start padding-left-custom"><h3 class="form-label text-size-regular text-start">Tags (cliquez pour sélectionner) : </h3></div>
-      <div class="tag-wrapper">
-        <% Tag.all.each do |tag| %>
-          <div class="tag-item">
-            <%= check_box_tag "tags[]", tag.id, params[:tags]&.include?(tag.id.to_s), id: "tag_#{tag.id}", class: "tag-checkbox" %>
-            <%= label_tag "tag_#{tag.id}", tag.name, class: "tag-label" %>
-          </div>
-          <% end %>
-      </div>
-    </div>
-
+    <% end %>
   </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const categoryCards = document.querySelectorAll(".category-selectable");
+
+    categoryCards.forEach(card => {
+      card.addEventListener("click", function() {
+        const categoryId = this.getAttribute("data-category");
+        document.getElementById("selected_category").value = categoryId;
+
+        categoryCards.forEach(c => c.classList.remove("category-selected"));
+        this.classList.add("category-selected");
+      });
+    });
+  });
+</script>
