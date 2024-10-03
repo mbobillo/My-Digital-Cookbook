@@ -14,47 +14,24 @@ Ingredient.destroy_all
 Recipe.destroy_all
 Category.destroy_all
 
+categories = Category.create([
+  { id: 0, name: "Entrée" },
+  { id: 1, name: "Plat" },
+  { id: 2, name: "Sauce" },
+  { id: 3, name: "Dessert" }
+  ])
+
 recipes = Recipe.create([
-  { title: "Sauce Ranch",
-    category_id: 2,
-    main_ingredient: "Mayonnaise",
-  },
-  { title: "Salade César",
-    category_id: 1,
-    main_ingredient: "Laitue",},
-
-  { title: "Poulet au curry",
-    category_id: 1,
-    main_ingredient: "Poulet",},
-
-    { title: "Julienne de crudités",
-      category_id: 0,
-      main_ingredient: "Carotte",},
-
-    { title: "Nems",
-      category_id: 0,
-      main_ingredient: "Feuille de riz",},
-
-    { title: "Sauce Cacouhète",
-      category_id: 2,
-      main_ingredient: "Beurre de cacahouète",},
-
-    { title: "Muffin au chocolat",
-      category_id: 3,
-      main_ingredient: "Chocolat",},
-
-    { title: "Tarte aux fraises",
-      category_id: 3,
-      main_ingredient: "Fraise",},
-
+  { title: "Sauce Ranch", category: categories.find { |c| c.name == "Sauce" }, main_ingredient: "Mayonnaise" },
+  { title: "Salade César", category: categories.find { |c| c.name == "Plat" }, main_ingredient: "Laitue" },
+  { title: "Poulet au curry", category: categories.find { |c| c.name == "Plat" }, main_ingredient: "Poulet" },
+  { title: "Julienne de crudités", category: categories.find { |c| c.name == "Entrée" }, main_ingredient: "Carotte" },
+  { title: "Nems", category: categories.find { |c| c.name == "Entrée" }, main_ingredient: "Feuille de riz" },
+  { title: "Sauce Cacouhète", category: categories.find { |c| c.name == "Sauce" }, main_ingredient: "Beurre de cacahouète" },
+  { title: "Muffin au chocolat", category: categories.find { |c| c.name == "Dessert" }, main_ingredient: "Chocolat" },
+  { title: "Tarte aux fraises", category: categories.find { |c| c.name == "Dessert" }, main_ingredient: "Fraise" }
 ])
 
-Category.create([
-  { name: "Entrée" },
-  { name: "Plat" },
-  { name: "Sauce" },
-  { name: "Dessert" },
-])
 
 ingredients = Ingredient.create([
   { name: "Mayonnaise" },

@@ -9,5 +9,14 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
+
+    if params[:tags].present?
+      @selected_tags = Tag.where(id: params[:tags])
+    else
+      @selected_tags = []
+    end
+
+    @main_ingredient = params[:main_ingredient] if params[:main_ingredient].present?
+
   end
 end

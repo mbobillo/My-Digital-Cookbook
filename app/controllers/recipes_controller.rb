@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: [show, edit, destroy]
+  before_action :set_recipe, only: [:show, :edit, :destroy]
 
   def new
     @recipe = Recipe.new
@@ -7,21 +7,29 @@ class RecipesController < ApplicationController
 
   def index
     @recipes = Recipe.all
+
     if params[:category].present?
+      @selected_category = Category.find(params[:category])
       @recipes = @recipes.where(category_id: params[:category])
+    else
+      @selected_category = nil
     end
 
     if params[:main_ingredient].present?
       @recipes = @recipes.where("main_ingredient ILIKE ?", "%#{params[:main_ingredient]}%")
+      @main_ingredient = params[:main_ingredient]
     end
 
     if params[:tags].present?
+      @selected_tags = Tag.where(id: params[:tags])
       @recipes = @recipes.joins(:tags).where(tags: { id: params[:tags] })
+    else
+      @selected_tags = []
     end
   end
 
   def show
-    @category = Recipe.find(params[:category_id])
+    @recipe = Recipe.find(params[:recipe_id])
   end
 
   def create
