@@ -1,5 +1,7 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :destroy]
+  skip_before_action :authenticate_user!, only: :categories
+
 
   def new
     @recipe = Recipe.new
@@ -20,6 +22,13 @@ class RecipesController < ApplicationController
       @main_ingredient = params[:main_ingredient]
     end
 
+    if params[:ingredients].present?
+      @ingredients_list = Ingredient.where(id: params[:ingredients])
+      @recipes = @recipes.joins(:ingredients).where(ingredients: { id: params[:ingredients] })
+    else
+      @ingredients_list = []
+    end
+
     if params[:tags].present?
       @selected_tags = Tag.where(id: params[:tags])
       @recipes = @recipes.joins(:tags).where(tags: { id: params[:tags] })
@@ -29,16 +38,19 @@ class RecipesController < ApplicationController
   end
 
   def show
-    @recipe = Recipe.find(params[:recipe_id])
+    @selected_category = @recipe.category
+    @main_ingredient = @recipe.main_ingredient
+    @ingredients_list = @recipe.ingredients
+    @selected_tags = @recipe.tags
   end
 
   def create
     @recipe = Recipe.new(recipe_params)
 
-    ingredients_list = params[:recipe][:ingredients].split(',').map(&:strip).uniq
+    @ingredients_list = params[:recipe][:ingredients].split(',').map(&:strip).uniq
 
     if @recipe.save
-      ingredients_list.each do |ingredient_name|
+      @ingredients_list.each do |ingredient_name|
         ingredient = Ingredient.find_or_create_by(name: ingredient_name)
 
         RecipeIngredient.create(recipe: @recipe, ingredient: ingredient)
@@ -62,7 +74,7 @@ class RecipesController < ApplicationController
   private
 
   def recipe_params
-    params.require(:recipe).permit(:title, :main_ingredient, :category_id)
+    params.require(:recipe).permit(:title, :main_ingredient, :category_id, images: [])
   end
 
   def set_recipe

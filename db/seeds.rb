@@ -22,14 +22,14 @@ categories = Category.create([
   ])
 
 recipes = Recipe.create([
-  { title: "Sauce Ranch", category: categories.find { |c| c.name == "Sauce" }, main_ingredient: "Mayonnaise" },
-  { title: "Salade César", category: categories.find { |c| c.name == "Plat" }, main_ingredient: "Laitue" },
-  { title: "Poulet au curry", category: categories.find { |c| c.name == "Plat" }, main_ingredient: "Poulet" },
-  { title: "Julienne de crudités", category: categories.find { |c| c.name == "Entrée" }, main_ingredient: "Carotte" },
-  { title: "Nems", category: categories.find { |c| c.name == "Entrée" }, main_ingredient: "Feuille de riz" },
-  { title: "Sauce Cacouhète", category: categories.find { |c| c.name == "Sauce" }, main_ingredient: "Beurre de cacahouète" },
-  { title: "Muffin au chocolat", category: categories.find { |c| c.name == "Dessert" }, main_ingredient: "Chocolat" },
-  { title: "Tarte aux fraises", category: categories.find { |c| c.name == "Dessert" }, main_ingredient: "Fraise" }
+  { id: 0, title: "Sauce Ranch", category: categories.find { |c| c.name == "Sauce" }, main_ingredient: "Mayonnaise", source_url: "https://www.marmiton.org/recettes/recette_sauce-ranch_391427.aspx" },
+  { id: 1, title: "Salade César", category: categories.find { |c| c.name == "Plat" }, main_ingredient: "Laitue" },
+  { id: 2, title: "Poulet au curry", category: categories.find { |c| c.name == "Plat" }, main_ingredient: "Poulet" },
+  { id: 3, title: "Julienne de crudités", category: categories.find { |c| c.name == "Entrée" }, main_ingredient: "Carotte" },
+  { id: 4, title: "Nems", category: categories.find { |c| c.name == "Entrée" }, main_ingredient: "Feuille de riz", source_url: " https://www.youtube.com/watch?v=PcOx_wsG63A"},
+  { id: 5, title: "Sauce Cacouhète", category: categories.find { |c| c.name == "Sauce" }, main_ingredient: "Beurre de cacahouète" },
+  { id: 6, title: "Muffin au chocolat", category: categories.find { |c| c.name == "Dessert" }, main_ingredient: "Chocolat" },
+  { id: 7, title: "Tarte aux fraises", category: categories.find { |c| c.name == "Dessert" }, main_ingredient: "Fraise" }
 ])
 
 
@@ -48,7 +48,7 @@ ingredients = Ingredient.create([
   { name: "Crouton" },
   { name: "Anchois" },
   { name: "Vinaigre de cidre" },
-  { name: "Gimgembre" },
+  { name: "Gingembre" },
   { name: "Farine" },
   { name: "Beurre" },
   { name: "Sucre" },
