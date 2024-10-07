@@ -60,6 +60,14 @@ h3, h4, h5, h6 {
   color: $black;
 }
 
+.color-red {
+  color: rgb(244, 83, 83);
+}
+
+.underline {
+  text-decoration: underline;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -110,6 +118,10 @@ a {
 }
 
 // Body Size
+
+.text-size-xsmall {
+  font-size: 12px;
+}
 
 .text-size-small {
   font-size: 14px;
@@ -172,6 +184,15 @@ a {
   background-color: $dark-green;
   margin: 1rem 0;
   justify-content: center;
+}
+
+@media (max-height: 740px) {
+  .thick-line {
+    margin: 0 0;
+  }
+  .container-custom {
+    padding: 1rem 1rem;
+  }
 }
 
 .row {

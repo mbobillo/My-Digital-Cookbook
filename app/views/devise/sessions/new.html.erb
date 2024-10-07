@@ -1,29 +1,30 @@
 <div class="full-screen">
   <div class="container-custom">
-    <h2 class="text-center color-green">Log in</h2>
+    <h2 class="text-center color-green">Connexion</h2>
     <hr class="thick-line mb-3">
     <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="form-inputs">
         <%= f.input :email,
-                    required: false,
+                    required: true,
                     autofocus: true,
                     class: "input-field text-size-small background-blue",
                     input_html: { autocomplete: "email" } %>
         <%= f.input :password,
-                    required: false,
+                    required: true,
+                    label: "Mot de passe",
                     class: "input-field text-size-small background-blue",
                     input_html: { autocomplete: "current-password" } %>
         <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
       </div>
 
       <div class="form-actions">
-        <%= f.button :submit, "Log in", class: "button-small mb-3" %>
+        <%= f.button :submit, "Connexion", class: "button-small text-size-regular mb-3" %>
         <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-          <%= link_to "Sign up", new_registration_path(resource_name), class: "mt-3 color-black" %><br />
+          <%= link_to "Inscription", new_registration_path(resource_name), class: "mt-3 color-green text-size medium underline" %><br />
         <% end %>
 
         <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-          <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+          <%= link_to "Mot de passe oublié?", new_password_path(resource_name), class: "text-size-xsmall" %><br />
         <% end %>
       </div>
     <% end %>

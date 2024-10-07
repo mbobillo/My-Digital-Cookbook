@@ -5,13 +5,14 @@
     <div class="input-wrapper py-1 mt-1">
       <div class="d-flex flex-row justify-content-center align-items-center">
         <h3 class="form-label text-size-regular">Catégorie :</h3>
-        <% if @selected_category.present? %>
-          <h3 class="form-label text-size-regular color-green ms-2">
+          <% if @selected_category.present? %>
+            <h3 class="form-label text-size-regular color-green ms-2">
             <%= @selected_category.name.upcase %>
           </h3>
         <% else %>
           <h3 class="form-label text-size-regular color-green ms-2">Non renseignée</h3>
         <% end %>
+        <%= link_to "Modifier la recette", edit_recipe_path, class:"edit-link" %>
       </div>
     </div>
     <div class="input-wrapper py-1">

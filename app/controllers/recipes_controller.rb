@@ -1,7 +1,5 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :destroy]
-  skip_before_action :authenticate_user!, only: :categories
-
 
   def new
     @recipe = Recipe.new

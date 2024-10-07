@@ -4,10 +4,15 @@
 
 .form-label {
   margin-bottom: 2px;
+  font-size:14px;
 }
 
 .form-check-input {
   background-color: $light-blue !important;
+}
+
+.form-check-label {
+  font-size:12px;
 }
 
 .form-actions {

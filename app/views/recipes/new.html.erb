@@ -1,5 +1,59 @@
 <div class="full-screen">
   <div class="container-custom">
-    
+      <%= form_with url: new_recipe_path, method: :post, local: true, data: { turbo: false }, multipart: true do |f|  %>
+        <div class="input-wrapper-low-padding input-wrapper-title">
+          <label for="title" class="d-none">Titre</label>
+          <%= f.text_field :title, placeholder: "Titre", class: "input-field input-uppercase title-placeholder" %>
+        </div>
+        <div class="d-flex flex-column align-items-center">
+          <hr class="thick-line">
+        </div>
+        <div class="d-flex flex-column justify-content-start">
+          <div class="input-wrapper-low-padding">
+            <div class="d-flex justify-content-center align-items-center me-2"><h3 class="form-label text-size-regular">Catégorie : </h3></div>
+            <label for="category" class="d-none">Catégorie</label>
+            <%= f.select :category, options_for_select(["Entrée", "Plat", "Sauce", "Dessert"]), placeholder: "Entrée", class: "input-field" %>
+          </div>
+          <div class="input-wrapper-low-padding">
+            <div class="d-flex justify-content-center align-items-center me-2"><h3 class="form-label text-size-regular">Ingrédient clé : </h3></div>
+            <label for="main_ingredient" class="d-none">Ingredient clé</label>
+            <%= f.text_field :main_ingredient, placeholder: "Carotte", class: "input-field text-size-small input-uppercase lowercase-placeholder" %>
+          </div>
+          <div class="input-wrapper-column">
+            <div class="d-flex justify-content-center align-items-center me-2"><h3 class="form-label text-size-regular">Autres ingrédients: </h3></div>
+            <label for="recipe_ingredients" class="d-none">Autres ingrédients</label>
+            <div class="input-container">
+              <%= f.text_field :recipe_ingredients, placeholder: "oignon, sauce soja, gingembre", class: "input-field text-size-small input-uppercase" %>
+            </div>
+          </div>
+          <div class="text-start padding-left-custom">
+            <h3 class="form-label text-size-regular text-start padding-left-add">Tags (cliquez pour sélectionner) : </h3>
+          </div>
+          <div class="tag-wrapper my-2">
+            <% Tag.all.each do |tag| %>
+              <div class="tag-item">
+                <%= check_box_tag "tags[]", tag.id, params[:tags]&.include?(tag.id.to_s), id: "tag_#{tag.id}", class: "tag-checkbox" %>
+                <%= label_tag "tag_#{tag.id}", tag.name, class: "tag-label" %>
+              </div>
+              <% end %>
+          </div>
+          <div class="input-wrapper-low-padding">
+            <div class="d-flex justify-content-center align-items-center me-2"><h3 class="form-label text-size-regular">URL : </h3></div>
+            <label for="source_url" class="d-none">URL</label>
+            <%= f.text_field :source_url, placeholder: "https://wwww....", class: "input-field text-size-small lowercase-placeholder" %>
+          </div>
+          <div class="input-wrapper-low-padding">
+            <div class="d-flex justify-content-center align-items-center me-2"><h3 class="form-label text-size-regular">Photos : </h3></div>
+            <label for="recipe_images" class="form-label d-none">Upload Images</label>
+            <%= f.file_field :images, multiple: true, accept: "image/*", class: "input-field text-size-small lowercase-placeholder" %>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center mt-2">
+          <%= f.submit "ENREGISTRER", class: "button-main" %>
+        </div>
+      <% end %>
+      <div class="destroy-link">
+        <%= link_to "Supprimer la recette", destroy_recipe_path, class:"color-red text-size-xsmall" %>
+      </div>
   </div>
 </div>

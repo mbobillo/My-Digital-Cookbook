@@ -2,6 +2,11 @@
   <div class="container-custom">
     <h1 class="text-center">My Digital Coobook</h1>
     <hr class="thick-line">
+    <div class="add-button-wrapper">
+      <div class="add-button button-small">
+        <%= link_to "Ajouter une recette", new_recipe_path %>
+      </div>
+    </div>
     <%= form_with url: recipes_path, method: :get, local: true, data: { turbo: false } do %>
       <div class="row-wrapper">
         <div class="row">

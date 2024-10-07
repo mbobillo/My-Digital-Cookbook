@@ -57,7 +57,7 @@
   position : cover;
 }
 
-@media (max-height: 700px) {
+@media (max-height: 745px) {
   .source-wrapper {
     height: 45vh;
     min-width: 280px;
@@ -88,4 +88,19 @@
     height: 40vh;
     min-width: 280px;
     max-width: 300px; }
+}
+
+.destroy-link {
+  text-decoration: underline;
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  cursor: pointer;
+}
+
+.edit-link {
+  cursor: pointer;
+  color: $black;
+  text-decoration: underline;
+  font-size: 14px;
 }
