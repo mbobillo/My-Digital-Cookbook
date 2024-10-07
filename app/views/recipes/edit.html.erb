@@ -1,9 +1,9 @@
 <div class="full-screen">
   <div class="container-custom">
-      <%= form_with model: @recipe, url:recipes_path, method: :post, local: true, data: { turbo: false }, multipart: true do |f|  %>
+      <%= form_with url: recipe_path(@recipe), method: :patch, local: true, data: { turbo: false }, multipart: true do |f|  %>
         <div class="input-wrapper-low-padding input-wrapper-title">
           <label for="title" class="d-none">Titre</label>
-          <%= f.text_field :title, placeholder: "Titre", class: "input-field input-uppercase title-placeholder" %>
+          <%= f.text_field :title, placeholder: @recipe.title, class: "input-field input-uppercase title-placeholder" %>
         </div>
         <div class="d-flex flex-column align-items-center">
           <hr class="thick-line">
@@ -12,18 +12,18 @@
           <div class="input-wrapper-low-padding">
             <div class="d-flex justify-content-center align-items-center me-2"><h3 class="form-label text-size-regular">Catégorie : </h3></div>
             <label for="category" class="d-none">Catégorie</label>
-            <%= f.select :category_id, options_from_collection_for_select(Category.all, :id, :name), prompt: "", class: "input-field text-size-small input-uppercase category-placeholder" %>
+            <%= f.select :category, options_for_select(["Entrée", "Plat", "Sauce", "Dessert"]), placeholder: @recipe.category, class: "input-field" %>
           </div>
           <div class="input-wrapper-low-padding">
             <div class="d-flex justify-content-center align-items-center me-2"><h3 class="form-label text-size-regular">Ingrédient clé : </h3></div>
             <label for="main_ingredient" class="d-none">Ingredient clé</label>
-            <%= f.text_field :main_ingredient, placeholder: "Carotte", class: "input-field text-size-small input-uppercase lowercase-placeholder" %>
+            <%= f.text_field :main_ingredient, placeholder: @recipe.main_ingredient, class: "input-field text-size-small input-uppercase lowercase-placeholder" %>
           </div>
           <div class="input-wrapper-column">
             <div class="d-flex justify-content-center align-items-center me-2"><h3 class="form-label text-size-regular">Autres ingrédients: </h3></div>
             <label for="recipe_ingredients" class="d-none">Autres ingrédients</label>
             <div class="input-container">
-              <%= f.text_field :recipe_ingredients, value: @recipe.ingredients.map(&:name).join(', '), placeholder: "oignon, sauce soja, gingembre", class: "input-field text-size-small input-uppercase" %>
+              <%= f.text_field :recipe_ingredients, placeholder: @recipe.ingredients_list, class: "input-field text-size-small input-uppercase" %>
             </div>
           </div>
           <div class="text-start padding-left-custom">
@@ -52,5 +52,8 @@
           <%= f.submit "ENREGISTRER", class: "button-main" %>
         </div>
       <% end %>
+      <div class="destroy-link">
+        <%= link_to "Supprimer la recette", recipe_path(@recipe), method: :delete, data: { confirm: "Êtes-vous sûr de vouloir supprimer cette recette ?" }, class: "color-red text-size-xsmall" %>
+      </div>
   </div>
 </div>
