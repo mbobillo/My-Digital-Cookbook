@@ -17,6 +17,10 @@ class RecipesController < ApplicationController
       end
     end
 
+    if params[:tags].present?
+      @recipe.tags = Tag.where(id: params[:tags])
+    end
+
     if @recipe.save
       redirect_to recipes_path, notice: 'Recette créée avec succès'
     else
@@ -75,6 +79,14 @@ class RecipesController < ApplicationController
         ingredient = Ingredient.find_or_create_by(name: ingredient_name)
         @recipe.ingredients << ingredient
       end
+    end
+
+    if params[:tags].present?
+      @recipe.tags = Tag.where(id: params[:tags])
+    end
+
+    if params[:recipe][:images].present?
+      @recipe.images.attach(params[:recipe][:images])
     end
 
     if @recipe.update(recipe_params)
