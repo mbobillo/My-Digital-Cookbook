@@ -39,6 +39,14 @@
 .tag-checkbox:checked + .tag-label {
   border: 1px solid $green;
   background-color: $green;
+  color: white;
+}
+
+.selected-tag .tag-label {
+  border: 1px solid $green;
+  background-color: $green;
+  color: white;
+
 }
 
 .padding-left-custom {

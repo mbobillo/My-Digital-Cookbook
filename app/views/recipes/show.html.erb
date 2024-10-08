@@ -2,7 +2,7 @@
   <div class="container-custom">
     <h1 class="text-center"><%= @recipe.title.capitalize %></h1>
     <hr class="thick-line">
-    <div class="input-wrapper py-1 mt-1">
+    <div class="input-wrapper py-1 mt-1 d-flex flex-row justify-content-between">
       <div class="d-flex flex-row justify-content-center align-items-center">
         <h3 class="form-label text-size-regular">Catégorie :</h3>
           <% if @selected_category.present? %>
@@ -12,6 +12,8 @@
         <% else %>
           <h3 class="form-label text-size-regular color-green ms-2">Non renseignée</h3>
         <% end %>
+      </div>
+      <div class="pb-1">
         <%= link_to "Modifier la recette", edit_recipe_path, class:"edit-link" %>
       </div>
     </div>
@@ -76,7 +78,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="imageModalLabel"><%= images.count  %> photos</h5>
+          <h5 class="modal-title" id="imageModalLabel"><%= @recipe.images.count  %> photos</h5>
           <button type="button" class="btn-close" data-action="click->modal#close" aria-label="Close"></button>
         </div>
         <div class="modal-body">

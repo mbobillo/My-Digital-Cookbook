@@ -23,7 +23,7 @@
             <div class="d-flex justify-content-center align-items-center me-2"><h3 class="form-label text-size-regular">Autres ingrédients: </h3></div>
             <label for="recipe_ingredients" class="d-none">Autres ingrédients</label>
             <div class="input-container">
-              <%= f.text_field :recipe_ingredients, value: @recipe.ingredients.map(&:name).join(', '), placeholder: "oignon, sauce soja, gingembre", class: "input-field text-size-small input-uppercase" %>
+              <%= f.text_field :recipe_ingredients, placeholder: "oignon, sauce soja, gingembre", class: "input-field text-size-small input-uppercase" %>
             </div>
           </div>
           <div class="text-start padding-left-custom">

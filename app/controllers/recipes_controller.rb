@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: [:show, :edit, :destroy]
+  before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
   def new
     @recipe = Recipe.new
@@ -8,25 +8,22 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
 
-    if params[:recipe_ingredients].present?
-      @ingredients_list = params[:recipe_ingredients].split(',').map(&:strip).uniq
-    else
-      @ingredients_list = []
+    if params[:recipe][:recipe_ingredients].present?
+      ingredients_list = params[:recipe][:recipe_ingredients].split(',').map(&:strip).uniq
+
+      ingredients_list.each do |ingredient_name|
+        ingredient = Ingredient.find_or_create_by(name: ingredient_name)
+        @recipe.ingredients << ingredient
+      end
     end
 
-    Rails.logger.debug "Ingredients list: #{@ingredients_list.inspect}"
-
     if @recipe.save
-      @ingredients_list.each do |ingredient_name|
-        ingredient = Ingredient.find_or_create_by(name: ingredient_name)
-        RecipeIngredient.create(recipe: @recipe, ingredient: ingredient)
-      end
-
       redirect_to recipes_path, notice: 'Recette créée avec succès'
     else
       render :new, status: :unprocessable_entity
     end
   end
+
 
   def index
     @recipes = Recipe.all
@@ -69,8 +66,22 @@ class RecipesController < ApplicationController
   end
 
   def update
-    @recipe.upate(params[:recipe])
-    redirect_to recipes_path(@recipe), notice: 'Recette modifiée avec succès'
+
+    if params[:recipe][:recipe_ingredients].present?
+      ingredients_list = params[:recipe][:recipe_ingredients].split(',').map(&:strip).uniq
+
+      @recipe.ingredients.clear
+      ingredients_list.each do |ingredient_name|
+        ingredient = Ingredient.find_or_create_by(name: ingredient_name)
+        @recipe.ingredients << ingredient
+      end
+    end
+
+    if @recipe.update(recipe_params)
+      redirect_to recipe_path(@recipe), notice: 'Recette mise à jour avec succès'
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
@@ -81,7 +92,7 @@ class RecipesController < ApplicationController
   private
 
   def recipe_params
-    params.require(:recipe).permit(:title, :main_ingredient, :category_id, :recipe_ingredients, :source_url, images: [], tags: [])
+    params.require(:recipe).permit(:title, :main_ingredient, :category_id, :source_url, images: [], tags: [])
   end
 
   def set_recipe
