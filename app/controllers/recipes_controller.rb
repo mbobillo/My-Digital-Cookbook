@@ -85,18 +85,24 @@ class RecipesController < ApplicationController
       @recipe.tags = Tag.where(id: params[:tags])
     end
 
-    if params[:recipe][:images].present?
-      @recipe.images.attach(params[:recipe][:images])
+    if params[:remove_all_images] == "true"
+      @recipe.images.purge
     end
 
-    if @recipe.update(recipe_params)
-      redirect_to recipe_path(@recipe), notice: 'Recette mise à jour avec succès'
+    if @recipe.update(recipe_params.except(:images))
+      if params[:recipe][:images].present?
+        params[:recipe][:images].each do |image|
+          @recipe.images.attach(image)
+        end
+      end
+      redirect_to recipe_path(@recipe, return_to: params[:return_to]), notice: 'Recette mise à jour avec succès'
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
+    @recipe.images.purge
     @recipe.destroy
     redirect_to recipes_path, status: :see_other, notice: "Recette supprimée avec succès"
   end

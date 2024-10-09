@@ -7,7 +7,8 @@
   justify-content: center;
   align-items: flex-start;
   box-sizing: border-box;
-  padding: 12px;
+  padding: 2rem 1.2rem;
+  margin-bottom: 1rem;
 }
 
 .recipe-link {
@@ -21,12 +22,13 @@
   width: 100%;
   max-width: 100%;
   height: auto;
-  padding: 2rem 28px;
+  margin-top: 1rem;
+  padding: 0 28px;
   background-color: $white;
   z-index: 100;
   position: absolute;
-  bottom: 0;
-  left: 0;
+  bottom: 16px;
+  text-align: end;
 }
 
 .return-link {
@@ -78,6 +80,7 @@
   }
   .results-wrapper {
     padding: 8px;
+    margin-bottom: 1rem;
   }
 }
 

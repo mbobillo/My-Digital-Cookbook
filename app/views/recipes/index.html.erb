@@ -36,7 +36,7 @@
     <div class="results-wrapper">
       <h2 class="form-label text-size-regular text-weight-semibold mb-2">RESULTATS DE RECHERCHE :</h2>
       <% @recipes.each do |recipe| %>
-        <%= link_to "#{recipe.title.upcase} <i class='fa-solid fa-arrow-right'></i>".html_safe, recipe_path(recipe), class: "recipe-link" %>
+        <%= link_to "#{recipe.title.upcase} <i class='fa-solid fa-arrow-right'></i>".html_safe, recipe_path(recipe, return_to: request.fullpath), class: "recipe-link" %>
       <% end %>
     </div>
     <div class="return-wrapper">

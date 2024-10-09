@@ -27,9 +27,9 @@
             </div>
           </div>
           <div class="text-start padding-left-custom">
-            <h3 class="form-label text-size-regular text-start padding-left-add">Tags (cliquez pour sélectionner) : </h3>
+            <h3 class="form-label text-size-regular text-start">Tags (cliquez pour sélectionner) : </h3>
           </div>
-          <div class="tag-wrapper my-2">
+          <div class="tag-wrapper">
               <% Tag.all.each do |tag| %>
                 <div class="tag-item">
                   <%= check_box_tag "tags[]", tag.id, @recipe.tags.include?(tag), id: "tag_#{tag.id}", class: "tag-checkbox" %>
@@ -37,19 +37,29 @@
                 </div>
               <% end %>
           </div>
-          <div class="input-wrapper-low-padding">
+          <div class="input-wrapper-low-padding pb-0">
             <div class="d-flex justify-content-center align-items-center me-2"><h3 class="form-label text-size-regular">URL : </h3></div>
             <label for="source_url" class="d-none">URL</label>
-            <%= f.text_field :source_url, placeholder: "https://wwww....", value: @recipe.source_url, class: "input-field text-size-small lowercase-placeholder" %>
+            <%= f.text_field :source_url, placeholder: @recipe.source_url, value: @recipe.source_url, class: "input-field text-size-small input-italic" %>
           </div>
-          <div class="input-wrapper-low-padding">
-            <div class="d-flex justify-content-center align-items-center me-2"><h3 class="form-label text-size-regular">Photos (<%= @recipe.images.count if @recipe.images.any? %>) : </h3></div>
-            <label for="recipe_images" class="form-label d-none">Upload Images</label>
-            <%= f.file_field :images, multiple: true, accept: "image/*", class: "input-field text-size-small lowercase-placeholder" %>
+          <div class="input-wrapper-low-padding d-flex flex-column align-items-start ">
+            <div class="d-flex flex-row justify-content-center align-items-center me-2 mb-1">
+              <h3 class="form-label text-size-regular text-start me-2">Photos (<%= @recipe.images.count %>) : </h3>
+              <% if @recipe.images.any? %>
+                <div class="delete-all-images">
+                  <%= check_box_tag "remove_all_images", "true" %>
+                  <%= label_tag "remove_all_images", "Supprimer les images" %>
+                </div>
+              <% end %>
+            </div>
+            <div class="d-flex flex-row align-items-center">
+              <label for="recipe_images" class="form-label text-size-regular text-start me-2">Ajout photos : </label>
+              <%= f.file_field :images, multiple: true, accept: "image/*", class: "input-field text-size-small lowercase-placeholder" %>
+            </div>
           </div>
-        </div>
-        <div class="d-flex justify-content-center mt-2">
-          <%= f.submit "ENREGISTRER", class: "button-main" %>
+          <div class="d-flex justify-content-center mt-2">
+            <%= f.submit "ENREGISTRER", class: "button-main" %>
+          </div>
         </div>
       <% end %>
       <div class="destroy-link">

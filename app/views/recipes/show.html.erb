@@ -1,10 +1,14 @@
 <div class="full-screen" data-controller="modal">
   <div class="container-custom">
-    <div class="close-button">
-      <%= link_to "javascript:history.back()", class: "close-link" do %>
-        <i class="fa-solid fa-times"></i>
-      <% end %>
-    </div>
+    <% if params[:return_to].present? %>
+      <div class="close-button">
+        <%= link_to content_tag(:i, "", class: "fa-solid fa-xmark"), params[:return_to], class: "close-link" %>
+      </div>
+    <% else %>
+      <div class="close-button">
+        <%= link_to content_tag(:i, "", class: "fa-solid fa-xmark"), recipes_path, class: "close-link" %>
+      </div>
+    <% end %>
     <h1 class="text-center"><%= @recipe.title.capitalize %></h1>
     <hr class="thick-line">
     <div class="input-wrapper py-1 mt-1 d-flex flex-row justify-content-between">
@@ -19,7 +23,7 @@
         <% end %>
       </div>
       <div class="pb-1">
-        <%= link_to "Modifier la recette", edit_recipe_path, class:"edit-link" %>
+        <%= link_to "Modifier la recette", edit_recipe_path(@recipe, return_to: params[:return_to]), class:"edit-link" %>
       </div>
     </div>
     <div class="input-wrapper py-1">
