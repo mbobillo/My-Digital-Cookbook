@@ -1,0 +1,18 @@
+.modal-header {
+  background-color: $light-green;
+}
+
+.modal-body {
+  background-color: $light-green;
+  height: 100vh;
+}
+
+.carousel-inner {
+  flex-grow: 1;
+}
+
+.carousel-control-next, .carousel-control-prev {
+    filter: invert(100%);
+    align-items: end;
+    padding-bottom: 50%;
+}

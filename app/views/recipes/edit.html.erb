@@ -30,12 +30,11 @@
             <h3 class="form-label text-size-regular text-start padding-left-add">Tags (cliquez pour sélectionner) : </h3>
           </div>
           <div class="tag-wrapper my-2">
-            <% Tag.all.each do |tag| %>
-              <% tag_is_selected = @recipe.tags.include?(tag) %>
-                <div class="tag-item <%= 'selected-tag' if tag_is_selected %>">
-                  <%= check_box_tag "tags[]", tag.id, params[:tags]&.include?(tag.id.to_s), id: "tag_#{tag.id}", class: "tag-checkbox" %>
+              <% Tag.all.each do |tag| %>
+                <div class="tag-item">
+                  <%= check_box_tag "tags[]", tag.id, @recipe.tags.include?(tag), id: "tag_#{tag.id}", class: "tag-checkbox" %>
                   <%= label_tag "tag_#{tag.id}", tag.name, class: "tag-label" %>
-              </div>
+                </div>
               <% end %>
           </div>
           <div class="input-wrapper-low-padding">
@@ -54,7 +53,7 @@
         </div>
       <% end %>
       <div class="destroy-link">
-        <%= link_to "Supprimer la recette", recipe_path(@recipe), method: :delete, data: { confirm: "Êtes-vous sûr de vouloir supprimer cette recette ?" }, class: "color-red text-size-xsmall" %>
+        <%= link_to "Supprimer la recette", recipe_path(@recipe), data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette recette ?" }, class: "color-red text-size-xsmall " %>
       </div>
   </div>
 </div>

@@ -74,6 +74,10 @@
     height: 45vh;
     min-width: 280px;
     max-width: 300px;
+    margin-top: 0.5rem;
+  }
+  .results-wrapper {
+    padding: 8px;
   }
 }
 
@@ -105,14 +109,14 @@
 .destroy-link {
   text-decoration: underline;
   position: absolute;
-  bottom: 1rem;
+  bottom: 0.75rem;
   left: 1rem;
   cursor: pointer;
 }
 
 .edit-link {
   cursor: pointer;
-  color: $dark-green;
+  color: $red;
   text-decoration: underline;
   font-size: 14px;
 }

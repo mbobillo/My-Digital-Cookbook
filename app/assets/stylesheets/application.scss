@@ -56,7 +56,7 @@ h3, h4, h5, h6 {
   color: $dark-green;
 }
 
-.color-green {
+.color-black {
   color: $black;
 }
 
@@ -159,10 +159,10 @@ a {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  position: relative;
   width: 100%;
   height: 100vh;
   max-height: 100vh;
+  overflow-y: auto;
   background-color: white;
 }
 
@@ -173,8 +173,13 @@ a {
   align-items: center;
   width: 100%;
   max-width: 100%;
+  height: 100vh;
+  max-height: 100vh;
+  overflow-y: auto;
   padding: 2rem 1rem;
   box-sizing: border-box;
+  position: relative;
+  flex-grow: 1;
 }
 
 .thick-line {
@@ -186,13 +191,13 @@ a {
   justify-content: center;
 }
 
-@media (max-height: 740px) {
-  .thick-line {
-    margin: 0.25rem 0;
-  }
-  .container-custom {
-    padding: 1rem 1rem;
-  }
+.close-button {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  font-weight: 900;
+  font-size: 22px;
+  color:$dark-green;
 }
 
 .row {
@@ -214,4 +219,38 @@ a {
   transition: background-color 0.3s ease;
   align-items: center;
   font-weight: 500;
+}
+
+
+@media (max-height: 740px) {
+  .thick-line {
+    margin: 0.5rem 0;
+  }
+  .container-custom {
+    padding: 1rem 1rem;
+  }
+  .error-message {
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 350px) {
+  .container-custom {
+    padding-bottom: 20px;
+  }
+  .destroy-link {
+    position: static;
+    margin-top: 0.5rem;
+  }
+}
+
+@media (min-width: 750px) {
+  .container-custom {
+    max-width: 680px;
+    height: auto;
+    max-height: auto;
+  }
+  .thick-line {
+    max-width: 680px;
+  }
 }

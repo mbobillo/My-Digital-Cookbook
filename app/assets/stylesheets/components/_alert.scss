@@ -4,3 +4,11 @@
   right: 16px;
   z-index: 1000;
 }
+
+.flash {
+  transition: opacity 1s ease-out;
+}
+
+.fade-out {
+  opacity: 0;
+}
