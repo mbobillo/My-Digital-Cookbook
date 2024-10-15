@@ -32,7 +32,7 @@ class RecipesController < ApplicationController
 
 
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.all.order('LOWER(title)')
 
     if params[:category].present?
       @selected_category = Category.find(params[:category])
