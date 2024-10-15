@@ -58,6 +58,9 @@
         <%= submit_tag "CHERCHER", class: "button-main" %>
       </div>
     <% end %>
+    <div class="return-wrapper">
+      <%= link_to "Déconnexion", destroy_user_session_path, 'data-turbo-method': :delete, class: "return-link", data: { confirm: 'Êtes-vous sûr de vouloir vous déconnecter ?' } %>
+    </div>
   </div>
 </div>
 
