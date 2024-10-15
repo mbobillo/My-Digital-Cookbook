@@ -1,6 +1,6 @@
 <div class="full-screen">
   <div class="container-custom">
-    <h1 class="text-center">My Digital Coobook</h1>
+    <%= link_to "My Digital Coobook", categories_path, class: "text-center h1" %>
     <hr class="thick-line">
     <div class="input-wrapper py-1 mt-1">
       <div class="d-flex flex-row justify-content-center align-items-center">
@@ -36,6 +36,9 @@
     <div class="results-wrapper">
       <h2 class="form-label text-size-regular text-weight-semibold mb-2">RESULTATS DE RECHERCHE :</h2>
       <% @recipes.each do |recipe| %>
+        <strong><%= link_to "#{recipe.title.upcase} <i class='fa-solid fa-arrow-right'></i>".html_safe, recipe_path(recipe, return_to: request.fullpath), class: "recipe-link" %></strong>
+      <% end %>
+      <% @other_recipes.each do |recipe| %>
         <%= link_to "#{recipe.title.upcase} <i class='fa-solid fa-arrow-right'></i>".html_safe, recipe_path(recipe, return_to: request.fullpath), class: "recipe-link" %>
       <% end %>
     </div>

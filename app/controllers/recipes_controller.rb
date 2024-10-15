@@ -9,10 +9,12 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
 
     if params[:recipe][:recipe_ingredients].present?
-      ingredients_list = params[:recipe][:recipe_ingredients].split(',').map(&:strip).uniq
+      ingredients_list = params[:recipe][:recipe_ingredients].split(',').map(&:strip).map(&:downcase).uniq
 
       ingredients_list.each do |ingredient_name|
-        ingredient = Ingredient.find_or_create_by(name: ingredient_name)
+        ingredient = Ingredient.where('LOWER(name) = ?', ingredient_name.downcase).first_or_initialize
+        ingredient.name = ingredient_name if ingredient.new_record?
+        ingredient.save!
         @recipe.ingredients << ingredient
       end
     end
@@ -39,9 +41,16 @@ class RecipesController < ApplicationController
       @selected_category = nil
     end
 
+    @other_recipes = Recipe.none
+
     if params[:main_ingredient].present?
-      @recipes = @recipes.where("main_ingredient ILIKE ?", "%#{params[:main_ingredient]}%")
+      searched_ingredient = params[:main_ingredient].downcase
       @main_ingredient = params[:main_ingredient]
+      @recipes = @recipes.where("lower(main_ingredient) LIKE ?", "%#{searched_ingredient}%")
+      @other_recipes = Recipe.joins(:ingredients)
+        .where("lower(ingredients.name) LIKE ?", "%#{searched_ingredient}%")
+        .where.not(id: @recipes.pluck(:id))
+        .distinct
     end
 
     if params[:ingredients].present?
@@ -70,13 +79,12 @@ class RecipesController < ApplicationController
   end
 
   def update
-
     if params[:recipe][:recipe_ingredients].present?
-      ingredients_list = params[:recipe][:recipe_ingredients].split(',').map(&:strip).uniq
+      ingredients_list = params[:recipe][:recipe_ingredients].split(',').map(&:strip).map(&:downcase).uniq
 
       @recipe.ingredients.clear
       ingredients_list.each do |ingredient_name|
-        ingredient = Ingredient.find_or_create_by(name: ingredient_name)
+        ingredient = Ingredient.where('LOWER(name) = ?', ingredient_name).first_or_create(name: ingredient_name)
         @recipe.ingredients << ingredient
       end
     end
@@ -100,6 +108,7 @@ class RecipesController < ApplicationController
       render :edit, status: :unprocessable_entity
     end
   end
+
 
   def destroy
     @recipe.images.purge
